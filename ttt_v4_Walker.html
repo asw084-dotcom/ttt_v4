@@ -1,0 +1,127 @@
+<html>
+<head>
+<style type="text/css">
+body {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 3vw;
+}
+#turn {
+    font-size: 2vw;
+    font-weight: bold;
+    margin: 20px auto;
+    display: block;
+    border: 2px solid orange;
+    border-radius: 0;
+    padding: 8px 20px;
+}
+#board {
+    width: 90vw;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+.square {
+    border: 2px solid #3545c5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 6vw;
+    font-weight: bold;
+    aspect-ratio: 1 / 1;
+    transition: background-color 0.2s ease;
+}
+.square:hover {
+    background-color: #e6ebff;
+}
+button {
+    margin-top: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid #3545c5;
+    background-color: #3545c5;
+    color: #fff;
+}
+button:hover {
+    background-color: #fff;
+    color: #000;
+}
+a {
+    text-decoration: none;
+    display: block;
+    width: 200px;
+    text-align: center;
+    padding: 10px 0 10px 0;
+    box-sizing: border-box;
+    margin: 20px auto 5px auto;
+    color: #3545c5;
+}
+a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+<body>
+<header>
+    <h1>Ash's Tic Tac Toe Game</h1>
+</header>
+<div id="turn">It's O's Turn</div>
+<div id="board">
+<script>
+const NUM_SQUARES = 9;
+for (i=0; i<NUM_SQUARES; i++)
+{
+id = "sq"+i;
+document.write( "<div class='square' id='" + id + "'></div>" );
+}
+</script>
+</div>
+
+<script>
+currentPlayer = "";
+
+window.onload = function()
+{
+    r = Math.round(Math.random());
+    if (r == 0)
+        currentPlayer = "X";
+    else
+        currentPlayer = "O";
+
+    document.getElementById("turn").innerHTML = "It's " + currentPlayer + "'s Turn";
+
+    for (i=0; i<NUM_SQUARES; i++)
+        document.querySelector("#sq" + i).onclick = squareHandler;
+}
+
+function squareHandler()
+{
+    if (this.innerHTML != "")
+        return;
+
+    this.innerHTML = currentPlayer;
+
+    if (currentPlayer == "X")
+        currentPlayer = "O";
+    else
+        currentPlayer = "X";
+
+    document.getElementById("turn").innerHTML = "It's " + currentPlayer + "'s Turn";
+}
+</script>
+<button>Start Game</button>
+<a href="https://en.wikipedia.org/wiki/Tic-tac-toe" target="_blank">
+Learn More
+</a>
+</body>
+</html>
